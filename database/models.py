@@ -8,8 +8,5 @@ class Projectid(db.Entity):
     allocatedapicalls = Required(str)
     usedapicalls = Required(int)
 
-    project_ids = Set('')
-
 
 db.generate_mapping(create_tables=True)
-

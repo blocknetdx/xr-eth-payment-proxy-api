@@ -29,6 +29,13 @@ def unauthorized_error(error):
     })
     return response
 
+@app.route('/xrs/eth_passthrough/listprojectid', methods=['GET'])
+def requestprojectid():
+    # this is to be removed, debug function
+    payload = listproject_ids()
+    return jsonify(payload)
+
+@db_session
 
 @app.route('/xrs/eth_passthrough/requestprojectid', methods=['POST'])
 def requestprojectid():
@@ -43,6 +50,12 @@ def requestprojectid():
 def addprojectid_db():
     #
     print('add to db')
+    projectid = {}
+    projectid['name'] = 'test'
+    projectid['paymenthash']='paymenthash'
+    projectid['allocatedapicalls'] = '9999'
+    projectid['usedapicalls'] ='1'
+    Projectid(name=projectid['name'],paymenthash=projectid['paymenthash'],allocatedapicalls=projectid['allocatedapicalls'],usedapicalls=projectid['usedapicalls'])
 
 @app.route('/xrs/eth_passthrough/<project_id>', methods=['POST'])
 def handlerequest(project_id):
