@@ -76,7 +76,7 @@ def handle_request(project_id):
         'API-TOKENS-REMAINING': g.project.api_token_count - g.project.used_api_tokens
     }
 
-    data = request.json
+    data = request.get_json()
 
     try:
         method = data['method']
@@ -86,7 +86,7 @@ def handle_request(project_id):
 
         response = req_handler.post_eth_proxy(method=method, params=params)
 
-        return Response(headers=headers, response=json.dumps(response))
+        return Response(headers=headers, response=response)
     except Exception as e:
         print(e, flush=True)
         response = {

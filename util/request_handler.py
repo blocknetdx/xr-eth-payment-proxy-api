@@ -22,4 +22,4 @@ class RequestHandler:
                 'method': method,
                 'params': params
             }
-        }).json()
+        }).text
