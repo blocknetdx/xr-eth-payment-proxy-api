@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 
 
@@ -16,14 +17,17 @@ class RequestHandler:
         if params is None or params == '':
             params = []
 
+        data = [
+            {
+                "jsonrpc": "2.0",
+                "method": method,
+                "params": params,
+                "id": 1
+            }
+        ]
+
         return self.session_eth.post('http://{}/xrs/eth_passthrough'.format(self.eth_proxy_host),
                                      headers={
-                                        'Content-Type': 'application/json'
+                                         'Content-Type': 'application/json'
                                      },
-                                     data={
-                                         'method': 'passthrough',
-                                         'params': {
-                                             'method': method,
-                                             'params': params
-                                         }
-                                     }).json()
+                                     data=json.dumps(data)).json()
