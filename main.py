@@ -37,7 +37,7 @@ def unauthorized_error(error):
 def request_project():
     project = req_handler.get_project()
 
-    app.logger.info('Project Requested: {}'.format(project))
+    print('Project Requested: {}'.format(project), flush=True)
 
     return jsonify(project)
 
@@ -61,7 +61,7 @@ def all_projects():
                 'active': p.active,
             } for p in query]
     except Exception as e:
-        app.logger.info(e)
+        print(e, flush=True)
 
     return jsonify(results)
 
@@ -82,13 +82,13 @@ def handle_request(project_id):
         method = data['method']
         params = data['params']
 
-        app.logger.info('Received Method: {}, Params: {}'.format(method, params))
+        print('Received Method: {}, Params: {}'.format(method, params), flush=True)
 
         response = req_handler.post_eth_proxy(method=method, params=params)
 
         return Response(headers=headers, response=json.dumps(response))
     except Exception as e:
-        app.logger.info(e)
+        print(e, flush=True)
         response = {
             'message': "An error has occurred!",
             'error': 1000
