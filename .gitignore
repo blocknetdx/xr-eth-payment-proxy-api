@@ -5,3 +5,7 @@ venv/*
 clouddb
 clouddb/*
 *.sh
+
+.idea/
+
+*.log

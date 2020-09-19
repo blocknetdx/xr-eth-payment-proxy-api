@@ -1,0 +1,13 @@
+stages:
+- name: Build ETH-Proxy-API
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: eth-proxy-api:${CICD_EXECUTION_SEQUENCE}
+- name: ETH-Proxy-API
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
+timeout: 60
+notification: {}
