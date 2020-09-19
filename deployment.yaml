@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: ETH_PROXY_HOST
-            value: "xr-eth-server.cc-dev.svc.cluster.local"
+            value: "eth-proxy.cc-dev.svc.cluster.local:9090"
           - name: PAYMENT_PROCESSOR_HOST
             value: "eth-payment-processor.cc-dev.svc.cluster.local:8080"
           - name: DB_HOST

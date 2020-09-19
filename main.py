@@ -86,7 +86,7 @@ def handle_request(project_id):
 
         response = req_handler.post_eth_proxy(method=method, params=params)
 
-        return Response(headers=headers, response=response)
+        return Response(headers=headers, response=json.dumps(response))
     except Exception as e:
         print(e, flush=True)
         response = {
