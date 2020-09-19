@@ -76,7 +76,7 @@ def handle_request(project_id):
         'API-TOKENS-REMAINING': g.project.api_token_count - g.project.used_api_tokens
     }
 
-    data = request.get_json(force=True)
+    data = request.json
     method = data['method']
     params = data['params']
 
