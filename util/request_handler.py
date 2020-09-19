@@ -13,6 +13,9 @@ class RequestHandler:
         return self.session_payment.get('http://{}/create_project'.format(self.payment_processor_host)).json()
 
     def post_eth_proxy(self, method, params):
+        if params is None or params == '':
+            params = []
+
         return self.session_eth.post('http://{}/'.format(self.eth_proxy_host), data={
             'method': 'passthrough',
             'params': {

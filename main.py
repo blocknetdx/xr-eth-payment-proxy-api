@@ -70,6 +70,7 @@ def all_projects():
 @authenticate
 def handle_request(project_id):
     headers = {
+        'PROJECT-ID': project_id,
         'API-TOKENS': g.project.api_token_count,
         'API-TOKENS-USED': g.project.used_api_tokens,
         'API-TOKENS-REMAINING': g.project.api_token_count - g.project.used_api_tokens
@@ -78,8 +79,6 @@ def handle_request(project_id):
     data = request.get_json(force=True)
     method = data['method']
     params = data['params']
-
-    print(data, method, params)
 
     response = req_handler.post_eth_proxy(method=method, params=params)
 
