@@ -79,6 +79,8 @@ def handle_request(project_id):
     method = data['method']
     params = data['params']
 
+    print(data, method, params)
+
     response = req_handler.post_eth_proxy(method=method, params=params)
 
     return Response(headers=headers, response=json.dumps(response))

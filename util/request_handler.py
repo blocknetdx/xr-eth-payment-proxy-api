@@ -1,5 +1,4 @@
 import os
-import json
 import requests
 
 
@@ -13,14 +12,11 @@ class RequestHandler:
     def get_project(self):
         return self.session_payment.get('http://{}/create_project'.format(self.payment_processor_host)).json()
 
-    def post_eth_proxy(self, method, params=None):
-        if params is None:
-            params = []
-        
-        return self.session_eth.post('http://{}/'.format(self.eth_proxy_host), data=json.dumps({
+    def post_eth_proxy(self, method, params):
+        return self.session_eth.post('http://{}/'.format(self.eth_proxy_host), data={
             'method': 'passthrough',
             'params': {
                 'method': method,
                 'params': params
             }
-        })).json()
+        }).json()
