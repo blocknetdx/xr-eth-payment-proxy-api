@@ -77,14 +77,24 @@ def handle_request(project_id):
     }
 
     data = request.json
-    method = data['method']
-    params = data['params']
 
-    app.logger.info('Received Method: {}, Params: {}'.format(method, params))
+    try:
+        method = data['method']
+        params = data['params']
 
-    response = req_handler.post_eth_proxy(method=method, params=params)
+        app.logger.info('Received Method: {}, Params: {}'.format(method, params))
 
-    return Response(headers=headers, response=json.dumps(response))
+        response = req_handler.post_eth_proxy(method=method, params=params)
+
+        return Response(headers=headers, response=json.dumps(response))
+    except Exception as e:
+        app.logger.info(e)
+        response = {
+            'message': "An error has occurred!",
+            'error': 1000
+        }
+
+        return Response(headers=headers, response=json.dumps(response), status=400)
 
 
 def main():
